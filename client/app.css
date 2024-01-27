@@ -1,12 +1,69 @@
 body {
   margin: 0;
+  padding: 0;
+  overflow: hidden; 
+}
+
+.background-image {
+  background-image: url('../images/doggerStart.png');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  position: fixed; 
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.start-form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+  
+}
+
+.center-input {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: larger;
+}
+
+.start-button {
+  margin: 10px;
+  font-size: 18px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(129, 67, 1);
+  color: rgb(255, 213, 0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.start-button:hover {
+  transform: scale(1.1);
+}
+
+.instructions {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  background-color: rgb(129, 67, 1);
+  color: rgb(255, 213, 0);
+  margin-top: 20px;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 35vh;
+  max-width: 50vw;
 }
 
 .main {
   padding: 8px;
 }
 
-.task {
+.highScore {
   display: flex;
   align-items: center;
   border: 1px solid black;
@@ -14,10 +71,10 @@ body {
   max-width: 200px;
 }
 
-.task + .task {
+.highScore + .highScore {
   margin-top: 4px;
 }
 
-.task > * + * {
+.highScore > * + * {
   margin-left: 4px;
 }

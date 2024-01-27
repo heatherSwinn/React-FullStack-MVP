@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+
+import Gameboard from "./Gameboard.jsx"
+import StartScreen from "./StartScreen.jsx";
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [username, setUsername] = useState("");
 
-  useEffect(() => {
-    fetch("/api/tasks")
-      .then((res) => res.json())
-      .then((tasks) => {
-        setTasks(tasks);
-      });
-  }, []);
+  const handleStart = (enteredUsername) => {
+    setGameStarted(true);
+    setUsername(enteredUsername);
+  }
 
   return (
-    <main>
-      {tasks.map((task) => (
-        <span className="task" key={task.id}>
-          {task.description}
-        </span>
-      ))}
-    </main>
+    <div className="app">
+      {!gameStarted ? (
+        <StartScreen onStart={handleStart} />
+      ) : (
+        <Gameboard username={username} />
+      )}
+    </div>
   );
 };
 

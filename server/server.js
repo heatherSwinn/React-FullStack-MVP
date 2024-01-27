@@ -16,12 +16,12 @@ const app = express();
 
 app.use(express.json());
 
-
-app.get('/highscores', async (req, res) => {
+//highscore chart
+app.get('/api/highscores', async (req, res) => {
   try {
     // Use a JOIN query to retrieve high scores with usernames
     const query = `
-    SELECT player.username, highScore.score
+    SELECT player.username, highScore.score, highScore.id
     FROM highScore
     JOIN player ON highScore.player_id = player.player_id
     `;
@@ -33,6 +33,22 @@ app.get('/highscores', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+//user info
+app.get('/api/userinfo', async (req, res) => {
+  try {
+    const query = `
+    SELECT player_id, username, lives, currentscore
+    FROM player
+    `;
+
+    const result = await client.query(query);
+    res.json(result.rows);
+  } catch(error) {
+    console.error('Error executing query', error);
+    res.status(500).send('Internal Server Error');
+  }
+})
 
 app.post('/highscores', async (req, res) => {
   try {
