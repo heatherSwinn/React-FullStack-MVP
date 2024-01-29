@@ -3,9 +3,24 @@ import { useState } from "react";
 const StartScreen = ({ onStart }) => {
     const [username, setUsername] = useState("");
 
-    const handleStartGame = () => {
-        if (username.trim() !== "") {
-            onStart(username);
+    const handleStartGame = async () => {
+        try{
+            const response = await fetch("/api/start-game", {
+                method: "POST",
+                headers: {
+                    "content-Type": "application/json",
+                },
+                body: JSON.stringify({ username }),
+            });
+            if(!response.ok) {
+                throw new Error("Failed to start the game.");
+            }
+
+            const gameData = await response.json();
+
+            onStart(gameData.username);
+        } catch(error) {
+            console.error("Error starting the game: ", error);
         }
     };
 

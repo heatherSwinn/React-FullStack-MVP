@@ -34,15 +34,17 @@ app.get('/api/highscores', async (req, res) => {
   }
 });
 
-//user info
-app.get('/api/userinfo', async (req, res) => {
+//current user info
+app.get(`/api/userinfo/:username`, async (req, res) => {
   try {
+    const { username } = req.params;
     const query = `
     SELECT player_id, username, lives, currentscore
     FROM player
+    WHERE username = $1
     `;
 
-    const result = await client.query(query);
+    const result = await client.query(query, [username]);
     res.json(result.rows);
   } catch(error) {
     console.error('Error executing query', error);
@@ -50,6 +52,7 @@ app.get('/api/userinfo', async (req, res) => {
   }
 })
 
+//post to highscores after lives are out
 app.post('/highscores', async (req, res) => {
   try {
     const { username, score } = req.body;
@@ -69,6 +72,24 @@ app.post('/highscores', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+//start a new game and post current player information
+app.post("/api/start-game", async (req, res) => {
+  try {
+    const { username } = req.body;
+    const query = 
+      `INSERT INTO player (username, lives, currentScore) VALUES ($1, $2, $3) RETURNING *`
+
+    //insert a new player into the database with default values
+    const result = await client.query(query, [username, 3, 0]);
+
+    const newGame = result.rows[0];
+    res.json(newGame);
+  } catch (error) {
+    console.error("Error starting the game: ", error);
+    res.status(500).json({ error: "Internal Server Error "})
+  }
+})
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

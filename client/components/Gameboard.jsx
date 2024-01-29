@@ -2,12 +2,20 @@
 import Highscores from './Highscores.jsx';
 import UserInfo from './UserInfo.jsx';
 
-const Gameboard = () => {
+const Gameboard = ({ username, onRestart, onFinish }) => {
+
+    const handleRestart = () => {
+        onRestart();
+    }
+
+    const handleFinish = () => {
+        onFinish();
+    }
 
     return (
         <div>
-            <div id="userinfo">
-                <UserInfo />
+            <div className="userinfo">
+                <UserInfo username={username} />
             </div>
             <div id="highscores">
                 <Highscores />

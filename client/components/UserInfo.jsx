@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 
-const UserInfo = () => {
+const UserInfo = ({ username }) => {
     const [userInfo, setUserInfo] = useState([]);
     
     useEffect(() => {
-        fetch("/api/userinfo")
+        fetch(`/api/userinfo/${encodeURIComponent(username)}`)
         .then((res) => res.json())
         .then((userInfo) => {
             setUserInfo(userInfo);
           })
-      }, []);
+      }, [username]);
     
     
       return (
