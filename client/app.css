@@ -4,6 +4,15 @@ body {
   overflow: hidden; 
   background-color: black;
 }
+.app{
+  display: flex;
+}
+
+.info-panel{
+  flex: 1;
+  margin-left: 20px;
+  margin-right: 20px;
+}
 
 .background-image {
   background-image: url('../images/doggerStart.png');
@@ -91,4 +100,10 @@ h1{
 
 .userInfo{
   color: white;
+}
+
+#phaser-game {
+  width: 100%; /* Adjust the width as needed */
+  height: 400px; /* Adjust the height as needed */
+  margin-top: 20px; /* Add spacing between React components and Phaser game */
 }
