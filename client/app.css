@@ -35,23 +35,24 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 4%;
-  margin-right: 15vw;
-  
+  margin-top: 3vh;
+  margin-right: 50vw;
 }
 
 .center-input {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: larger;
+  margin-left: 28vw;
 }
 
 .start-button {
-  margin: 2vh;
+  margin: .5vh;
   font-size: 18px;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   background-color: rgb(129, 67, 1);
   color: rgb(255, 213, 0);
   transition: transform 0.3s ease-in-out;
+  margin-left: 28vw;
 }
 
 .start-button:hover {
@@ -63,17 +64,12 @@ body {
   font-size: 16px;
   background-color: rgb(129, 67, 1);
   color: rgb(255, 213, 0);
-  margin-top: 5vh;
   padding: 1vh;
   margin-left: 20%;
   text-align: center;
   margin-top: 35vh;
   max-width: 39vw;
 }
-
-/* .main {
-  padding: 2vh;
-} */
 
 .highScore {
   display: flex;
@@ -84,10 +80,6 @@ body {
   color: white;
 }
 
-/* .highScore + .highScore {
-  margin-top: 4px;
-  color: white;
-} */
 
 .highScore > * + * {
   margin-left: 4px;
@@ -103,7 +95,7 @@ h1{
 }
 
 #phaser-game {
-  width: 100%; /* Adjust the width as needed */
-  height: 400px; /* Adjust the height as needed */
-  margin-top: 20px; /* Add spacing between React components and Phaser game */
+  width: 100%; 
+  height: 400px; 
+  margin-top: 20px; 
 }

@@ -1,7 +1,7 @@
 import Highscores from './Highscores.jsx';
 import UserInfo from './UserInfo.jsx';
 import Phaser from 'phaser';
-import PhaserGame from './PhaserGame.jsx'; // Update the import statement to include the file extension
+import PhaserGame from './PhaserGame.jsx';
 import React from 'react';
 
 class Gameboard extends React.Component {
