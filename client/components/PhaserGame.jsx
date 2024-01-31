@@ -30,7 +30,7 @@ class PhaserGame extends Phaser.Scene {
     // Add the second background image in the bottom half
     this.background2 = this.add.image(0, splitY, 'background2').setOrigin(0, 0).setDisplaySize(this.sys.game.config.width, splitY);
 
-    this.enemy1 = this.physics.add.sprite(this.sys.game.config.width / 5, this.sys.game.config.height / 2, "enemy1");
+    this.enemy1 = this.physics.add.image(this.sys.game.config.width / 5, this.sys.game.config.height / 2, "enemy1");
     this.enemy2 = this.physics.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 1.8, "enemy2");
     this.enemy3 = this.physics.add.image(this.sys.game.config.width / 3, this.sys.game.config.height / 1.2, "enemy3");
     this.enemy4 = this.physics.add.image(this.sys.game.config.width / 3, this.sys.game.config.height / 1.6, "enemy4");
@@ -60,29 +60,63 @@ class PhaserGame extends Phaser.Scene {
 
     // Enable physics for enemy1
     this.physics.world.enable(this.enemy1);
+    this.physics.world.enable(this.enemy2);
+    this.physics.world.enable(this.enemy3);
+    this.physics.world.enable(this.enemy4);
 
     // Set the velocity for horizontal movement
-    this.enemy1.setVelocityX(100); // You can adjust the velocity as needed
+    this.enemy1.setVelocityX(10); 
+    this.enemy2.setVelocityX(80); 
+    this.enemy3.setVelocityX(90); 
+    this.enemy4.setVelocityX(60); 
 
-    // Add animations
-    this.anims.create({
-      key: "enemy1_anim",
-      frames: this.anims.generateFrameNumbers("enemy1"),
-      frameRate: 20,
-      repeat: -1
-    });
+    // // Add animations
+    // this.anims.create({
+    //   key: "enemy1_anim",
+    //   frames: this.anims.generateFrameNumbers("enemy1", { start: 0, end: 9, first: 0 }),
+    //   frameRate: 20,
+    //   repeat: -1
+    // });
 
-    // Play the animation
-    this.enemy1.play("enemy1_anim");
+    // // Play the animation
+    // this.enemy1.play("enemy1_anim");
+
+    //gets the input from the keyboard
+    this.cursorKeys = this.input.keyboard.createCursorKeys();
+    console.log("Cursor keys initialized:", this.cursorKeys);
+    //set bounds of player
+    this.player.setCollideWorldBounds(true);
   }
+
+  
 
   update() {
-    // Check if player is moving out of bounds
-    if (this.player.x > this.background2.width) {
-      // Reset player to the left side of background2 when it moves out of bounds
-      this.player.x = 0;
-    }
+    
+    this.movePlayerManager()
   }
+
+  //create function to move the player
+  movePlayerManager() {
+    const playerSpeed = 100;
+    // move left and right
+    if (this.cursorKeys.left.isDown) {
+        this.player.setVelocityX(-playerSpeed);
+    } else if (this.cursorKeys.right.isDown) {
+        this.player.setVelocityX(playerSpeed);
+    } else {
+        this.player.setVelocityX(0); 
+    }
+    
+    // move up and down
+    if (this.cursorKeys.up.isDown) {
+        this.player.setVelocityY(-playerSpeed);
+    } else if (this.cursorKeys.down.isDown) {
+        this.player.setVelocityY(playerSpeed);
+    } else {
+        this.player.setVelocityY(0); 
+    }
+}
+
 
   // createEnemy(enemy, key, background) {
   //   enemy = this.physics.add.image(
